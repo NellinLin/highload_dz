@@ -3,8 +3,8 @@ from src import socketlib
 from src import handlers
 
 
-HOST = '127.0.0.1'
-PORT = 6060
+HOST = ''
+PORT = 80
 CONFIG_PATH = '/etc/httpd.conf'
 
 
