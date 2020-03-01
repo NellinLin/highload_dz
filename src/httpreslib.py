@@ -96,6 +96,8 @@ class HttpResponse:
 
         if os.path.isdir(self.request_path):
             self.file_path = self.document_root + self.request_path + 'index.html'
+            if not (os.path.isfile(self.file_path)):
+                return self.response_with_error(403)
         else:
             self.file_path = self.document_root + self.request_path
 
