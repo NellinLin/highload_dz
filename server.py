@@ -5,10 +5,10 @@ from src import handlers
 
 HOST = ''
 PORT = 80
-CONFIG_PATH = '/etc/httpd.conf'
+# CONFIG_PATH = '/etc/httpd.conf'
 # HOST = '127.0.0.1'
 # PORT = 6060
-# CONFIG_PATH = './src/httpd.conf'
+CONFIG_PATH = './src/httpd.conf'
 
 
 def read_config_file():
