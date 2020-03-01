@@ -47,7 +47,7 @@ class HttpResponse:
         response += '\n'
         return response.encode()
 
-    def response_for_get(self):
+    def response_get_head(self, param=''):
         try:
             file = open(self.file_path, 'rb')
             body = file.read()
@@ -59,25 +59,11 @@ class HttpResponse:
             for key in self.headers:
                 response += '{} {}\r\n'.format(key, str(self.headers[key]))
 
-            response += '\n'
-            return response.encode() + body
-        except IOError:
-            return self.response_with_error(404)
-
-    def response_for_head(self):
-        try:
-            file = open(self.file_path, 'rb')
-            body = file.read()
-            file.close()
-
-            self.add_header('Content-Length:', str(len(body)))
-
-            response = 'HTTP/1.1 {} {}\r\n'.format(200, status_types['200'])
-            for key in self.headers:
-                response += '{} {}\r\n'.format(key, str(self.headers[key]))
+            if param == 'GET':
+                response += '\n'
+                return response.encode() + body
 
             response += '\r\n'
-
             return response.encode()
         except IOError:
             return self.response_with_error(404)
@@ -107,6 +93,6 @@ class HttpResponse:
             self.add_header('Content-Type:', content_types[self.file_path.split('.')[-1]])
 
         if request_method == 'GET':
-            return self.response_for_get()
+            return self.response_get_head('GET')
 
-        return self.response_for_head()
+        return self.response_get_head()
