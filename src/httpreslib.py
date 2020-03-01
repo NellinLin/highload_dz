@@ -43,7 +43,7 @@ class HttpResponse:
         response = 'HTTP/1.1 {} {}\r\n'.format(code, status_types[str(code)])
         response += '{} {}\r\n'.format('Date:', str(self.headers['Date:']))
         response += '{} {}\r\n'.format('Server:', str(self.headers['Server:']))
-        response += '{} {}\r\n'.format('Connection', str(self.headers['Connection']))
+        response += '{} {}\r\n'.format('Connection:', str(self.headers['Connection:']))
         response += '\n'
         return response.encode()
 
