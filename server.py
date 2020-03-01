@@ -3,12 +3,12 @@ from src import socketlib
 from src import handlers
 
 
-HOST = '0.0.0.0'
+HOST = ''
 PORT = 80
-# HOST = '127.0.0.1'
-# PORT = 4040
-
 CONFIG_PATH = '/etc/httpd.conf'
+# HOST = '127.0.0.1'
+# PORT = 6060
+# CONFIG_PATH = './src/httpd.conf'
 
 
 def read_config_file():
@@ -27,7 +27,7 @@ def read_config_file():
     for elem in file_data:
         if elem:
             elems = elem.split()
-            data_dict[elems[0]] = int(elems[1])
+            data_dict[elems[0]] = elems[1]
 
     return data_dict
 
@@ -39,7 +39,7 @@ if __name__ == '__main__':
     config_data = read_config_file()
     thread_pool = []
 
-    for i in range(config_data['thread_limit']):
+    for i in range(int(config_data['thread_limit'])):
         thread = threading.Thread(target=handlers.handler_client,
                                   args=[listen_socket, config_data['document_root']],
                                   daemon=True)

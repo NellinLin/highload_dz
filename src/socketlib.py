@@ -1,4 +1,5 @@
 import socket
+from src.httpreslib import HttpResponse
 
 
 def create_socket(host, port):
@@ -17,3 +18,8 @@ def receive_message(sock):
 
     message = message.decode('utf-8')
     return message
+
+
+def response_message(request, document_root):
+    response = HttpResponse(request, document_root)
+    return response.create_response()
