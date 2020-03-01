@@ -76,6 +76,8 @@ class HttpResponse:
             for key in self.headers:
                 response += '{} {}\r\n'.format(key, str(self.headers[key]))
 
+            response += '\r\n'
+
             return response.encode()
         except IOError:
             return self.response_with_error(404)
@@ -87,7 +89,7 @@ class HttpResponse:
         if not (request_method == 'GET' or request_method == 'HEAD'):
             return self.response_with_error(405)
 
-        self.request_path = parse.urlparse(request_first_line[1]).path
+        self.request_path = parse.urlparse(parse.unquote(request_first_line[1])).path
 
         if self.request_path.find('../') != -1:
             return self.response_with_error(404)
