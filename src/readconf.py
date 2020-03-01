@@ -1,4 +1,10 @@
+import os
+
+
 def read_config_file(config_path):
+    if not os.path.isfile(config_path):
+        config_path = './src/httpd.conf'
+
     try:
         file = open(config_path, 'r')
     except FileNotFoundError:
