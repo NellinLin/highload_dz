@@ -92,6 +92,7 @@ class HttpResponse:
             self.file_path = self.document_root + self.request_path
 
         if not os.path.isfile(self.file_path):
+            print(self.file_path)
             print('2 log 404')
             return self.response_with_error(404)
         else:
