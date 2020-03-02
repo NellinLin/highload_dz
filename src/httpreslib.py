@@ -40,11 +40,11 @@ class HttpResponse:
         self.headers.update({type: body})
 
     def response_with_error(self, code):
-        response = 'HTTP/1.1 {} {}\r\n'.format(code, status_types[str(code)])
-        response += '{} {}\r\n'.format('Date:', str(self.headers['Date:']))
-        response += '{} {}\r\n'.format('Server:', str(self.headers['Server:']))
-        response += '{} {}\r\n'.format('Connection:', str(self.headers['Connection:']))
-        response += '\n'
+        response = 'HTTP/1.1 {} {}\r\n'.format(code, status_types[str(code)]) +\
+                   '{} {}\r\n'.format('Date:', str(self.headers['Date:'])) +\
+                   '{} {}\r\n'.format('Server:', str(self.headers['Server:'])) +\
+                   '{} {}\r\n'.format('Connection:', str(self.headers['Connection:'])) +\
+                   '\n'
         return response.encode()
 
     def response_get_head(self, param=''):
