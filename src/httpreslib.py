@@ -83,7 +83,8 @@ class HttpResponse:
             print('1 log 404')
             return self.response_with_error(404)
 
-        if os.path.isdir(self.request_path):
+        # if os.path.isdir(self.request_path):
+        if self.request_path[-1] == '/':
             self.file_path = self.document_root + self.request_path + 'index.html'
             if not (os.path.isfile(self.file_path)):
                 print('log 403')
