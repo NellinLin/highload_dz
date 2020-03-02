@@ -9,7 +9,6 @@ def handler_client(listen_socket, document_root):
             request = socketlib.receive_message(client_socket)
             print('{}: {}'.format(client_address, request))
             response = socketlib.response_message(request, document_root)
-            print(response)
             client_socket.sendall(response)
             client_socket.close()
         except (ConnectionError, BrokenPipeError):

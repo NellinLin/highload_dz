@@ -59,6 +59,7 @@ class HttpResponse:
             for key in self.headers:
                 response += '{} {}\r\n'.format(key, str(self.headers[key]))
 
+            print(response)
             if param == 'GET':
                 response += '\n'
                 return response.encode() + body
@@ -66,6 +67,7 @@ class HttpResponse:
             response += '\r\n'
             return response.encode()
         except IOError:
+            print('filelog 403')
             return self.response_with_error(404)
 
     def create_response(self):
@@ -78,16 +80,19 @@ class HttpResponse:
         self.request_path = parse.urlparse(parse.unquote(request_first_line[1])).path
 
         if self.request_path.find('./') != -1:
+            print('1 log 404')
             return self.response_with_error(404)
 
         if os.path.isdir(self.request_path):
             self.file_path = self.document_root + self.request_path + 'index.html'
             if not (os.path.isfile(self.file_path)):
+                print('log 403')
                 return self.response_with_error(403)
         else:
             self.file_path = self.document_root + self.request_path
 
         if not os.path.isfile(self.file_path):
+            print('2 log 404')
             return self.response_with_error(404)
         else:
             self.add_header('Content-Type:', content_types[self.file_path.split('.')[-1]])
