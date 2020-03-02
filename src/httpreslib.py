@@ -77,7 +77,7 @@ class HttpResponse:
 
         self.request_path = parse.urlparse(parse.unquote(request_first_line[1])).path
 
-        if self.request_path.find('../') != -1:
+        if self.request_path.find('./') != -1:
             return self.response_with_error(404)
 
         if os.path.isdir(self.request_path):
