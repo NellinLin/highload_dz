@@ -25,6 +25,4 @@ if __name__ == '__main__':
                                   daemon=True)
         thread_pool.append(thread)
         thread.start()
-
-    for thread in thread_pool:
         thread.join()
